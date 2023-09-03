@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package order.v1;
+
+option go_package = "github.com/trrrrrys/modular-monolith-example/internal/proto/order/v1;order";
+
+service OrderService {
+  rpc OrderItem(OrderItemRequest) returns (OrderItemResponse);
+}
+
+message OrderItemRequest {
+  string item_id = 1;
+  string user_id = 2;
+}
+
+message OrderItemResponse {
+  string order_id = 1;
+  string item_id = 2;
+  string user_id = 3;
+}

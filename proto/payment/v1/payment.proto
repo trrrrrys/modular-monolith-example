@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package payment.v1;
+
+option go_package = "github.com/trrrrrys/modular-monolith-example/internal/proto/payment/v1;payment";
+
+service PaymentService {
+  rpc PaymentItem(PaymentItemRequest) returns (PaymentItemResponse);
+}
+
+message PaymentItemRequest {
+  string user_id = 1;
+  int64 price = 2;
+}
+
+message PaymentItemResponse {
+  string result = 1;
+}

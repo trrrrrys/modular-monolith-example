@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package account.v1;
+
+option go_package = "github.com/trrrrrys/modular-monolith-example/internal/proto/account/v1;account";
+
+service AccountService {
+  rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse);
+  rpc GetShippingAddress(GetShippingAddressRequest) returns (GetShippingAddressResponse);
+}
+
+message GetUserInfoRequest {
+  string id = 1;
+}
+
+message GetUserInfoResponse {
+  string id = 1;
+  string name = 2;
+}
+
+message GetShippingAddressRequest {
+  string user_id = 1;
+}
+
+message GetShippingAddressResponse {
+  string user_id = 1;
+  string postal_code = 2;
+  string address = 3;
+}

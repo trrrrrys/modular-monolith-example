@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package product.v1;
+
+option go_package = "github.com/trrrrrys/modular-monolith-example/internal/proto/product/v1;product";
+
+service ProductService {
+  rpc GetItem(GetItemRequest) returns (GetItemResponse);
+  rpc ShipItem(ShipItemRequest) returns (ShipItemResponse);
+}
+
+message GetItemRequest {
+  string item_id = 1;
+}
+
+message GetItemResponse {
+  string item_id = 1;
+  int64 price = 2;
+  int64 stock_count = 3;
+}
+
+message ShipItemRequest {
+  string item_id = 1;
+}
+
+message ShipItemResponse {
+}
