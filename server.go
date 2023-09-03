@@ -70,7 +70,7 @@ func runServer() {
 	order.RegisterOrderServiceServer(s, orderModule)
 
 	reflection.Register(s)
-	lis, err := net.Listen("tcp", "127.0.0.1:50051")
+	lis, err := net.Listen("tcp", "0.0.0.0:50051")
 	if err != nil {
 		panic(fmt.Errorf("network I/O error: %w", err))
 	}
