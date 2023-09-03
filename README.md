@@ -17,8 +17,15 @@ $ grpcurl -plaintext \
 ├── buf.gen.yaml
 ├── buf.work.yaml
 ├── internal
-│   ├── modules
+│   │   ├── account
+│   │   ├── order
+│   │   ├── payment
+│   │   └── product
 │   └── proto
+│       ├── account
+│       ├── order
+│       ├── payment
+│       └── product
 ├── main.go
 ├── proto
 │   ├── account
