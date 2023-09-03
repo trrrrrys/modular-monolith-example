@@ -15,9 +15,9 @@ import (
 )
 
 func NewOrderService(
-	accountService account.AccountServiceClient,
-	paymentService payment.PaymentServiceClient,
-	productService product.ProductServiceClient,
+	accountService account.AccountServiceServer,
+	paymentService payment.PaymentServiceServer,
+	productService product.ProductServiceServer,
 ) order.OrderServiceServer {
 	return &orderService{
 		accountService: accountService,
@@ -27,9 +27,9 @@ func NewOrderService(
 }
 
 type orderService struct {
-	accountService account.AccountServiceClient
-	paymentService payment.PaymentServiceClient
-	productService product.ProductServiceClient
+	accountService account.AccountServiceServer
+	paymentService payment.PaymentServiceServer
+	productService product.ProductServiceServer
 }
 
 func init() {

@@ -19,7 +19,6 @@ import (
 	"github.com/trrrrrys/modular-monolith-example/internal/proto/payment/v1"
 	"github.com/trrrrrys/modular-monolith-example/internal/proto/product/v1"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/reflection"
 )
 
@@ -36,7 +35,7 @@ func runServer() {
 
 	nrenabled := os.Getenv("NEWRELIC_LICENSE_KEY") != ""
 	nrapp, err := newrelic.NewApplication(
-		newrelic.ConfigAppName("modular-monolith-example"),
+		newrelic.ConfigAppName("modular-monolith-example-2"),
 		newrelic.ConfigLicense(os.Getenv("NEWRELIC_LICENSE_KEY")),
 		newrelic.ConfigDistributedTracerEnabled(true),
 		func(cfg *newrelic.Config) {
@@ -53,26 +52,17 @@ func runServer() {
 			dummyInterceptor,
 		),
 	)
-	conn, err := grpc.Dial(
-		"127.0.0.1:50051",
-		grpc.WithTransportCredentials(insecure.NewCredentials()),
-		grpc.WithUnaryInterceptor(nrgrpc.UnaryClientInterceptor),
-		grpc.WithStreamInterceptor(nrgrpc.StreamClientInterceptor),
-	)
 	if err != nil {
 		panic(err)
 	}
-	accountClient := account.NewAccountServiceClient(conn)
-	paymentClient := payment.NewPaymentServiceClient(conn)
-	productClient := product.NewProductServiceClient(conn)
 	accountModule := accountModule.NewAccountService()
 	productModule := productModule.NewproductService()
 	paymentModule := paymentModule.NewpaymentService()
 
 	orderModule := orderModule.NewOrderService(
-		accountClient,
-		paymentClient,
-		productClient,
+		accountModule,
+		paymentModule,
+		productModule,
 	)
 	account.RegisterAccountServiceServer(s, accountModule)
 	product.RegisterProductServiceServer(s, productModule)
